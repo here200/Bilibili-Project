@@ -11,7 +11,7 @@
   - ![image-20220509121120711](images/image-20220509121120711.png)
 - 用户登录中心的cookie
 
-## 3. DEMO
+## 3. Demo
 
 ![image-20220509121818806](images/image-20220509121818806.png)
 
