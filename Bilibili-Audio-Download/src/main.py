@@ -110,9 +110,9 @@ class Bilibili(object):
         print('>---  ' + title + ' 已经下载完成 ---<')
 
     # 一步下载音频文件(主要目的是为了方便操作)
-    def download_audio(self, avid):
+    def download_audio(self, index):
         # 解析视频的标题和音频链接
-        data = self.parse_title_and_audio(avid=avid)
+        data = self.parse_title_and_audio(str(self.fav_list_data[index]['avid']))
         if os.path.exists('./data/' + data['title']):
              print('>---  ' + data['title'] + ' 已经存在，不会进行下载 ---<')
         else:
@@ -121,20 +121,22 @@ class Bilibili(object):
 
     # main_process
     def start(self):
-        # 1. 获取用户的收藏夹
+        # 获取用户的收藏夹
         self.fav()
         print('收藏夹：')
         print_container(self.fav_data)
-        # 2. 选择某个用户的收藏夹，获取收藏夹列表
-        # self.get_fav_list_data(self.fav_data[1]['fav_id'])
+        # 选择某个用户的收藏夹，获取收藏夹列表
+        fav_index = 1
+        self.get_fav_list_data(self.fav_data[fav_index]['fav_id'])
         print('收藏夹列表：')
         print_container(self.fav_list_data)
-        # 3. 下载音频文件
-        # for i in range(0, len(self.fav_list_data)):
-        #     self.download_audio(str(self.fav_list_data[i]['avid']))
+        # 通过索引，一步下载音频文件
+        songs_index = [30, 33]
+        for i in songs_index:
+            self.download_audio(i)
 
 
 if __name__ == '__main__':
     # 创建实例时，必须填写用户的UID
-    t = Bilibili('user-ID')
+    t = Bilibili('user-id')
     t.start()
