@@ -120,18 +120,16 @@ class Bilibili(object):
             self.save_data(data)
 
     # main_process
-    def start(self):
+    def start(self, fav_index, songs_index):
         # 获取用户的收藏夹
         self.fav()
         print('收藏夹：')
         print_container(self.fav_data)
         # 选择某个用户的收藏夹，获取收藏夹列表
-        fav_index = 1
         self.get_fav_list_data(self.fav_data[fav_index]['fav_id'])
         print('收藏夹列表：')
         print_container(self.fav_list_data)
         # 通过索引，一步下载音频文件
-        songs_index = [30, 33]
         for i in songs_index:
             self.download_audio(i)
 
@@ -139,4 +137,8 @@ class Bilibili(object):
 if __name__ == '__main__':
     # 创建实例时，必须填写用户的UID
     t = Bilibili('user-id')
-    t.start()
+    # 收藏夹列表索引
+    fav_index = 0
+    # 收藏夹列表内容索引
+    songs_index = [0, 3]
+    t.start(fav_index, songs_index)
