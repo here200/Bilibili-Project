@@ -105,8 +105,9 @@ class Bilibili(object):
         url = data['audio_url']
         # 保存到 ./data/ 中
         audio = self.get_data(url=url)
-        with open('./data/' + title, 'wb') as f:
+        with open('./data/output.mp3', 'wb') as f:
             f.write(audio)
+        os.rename('./data/output.mp3', './data/' + title)
         print('>---  ' + title + ' 已经下载完成 ---<')
 
     # 一步下载音频文件(主要目的是为了方便操作)
