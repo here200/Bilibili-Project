@@ -89,7 +89,10 @@ class Bilibili(object):
         str = self.get_data(url=url).decode()
         # 1.提取标题
         html = etree.HTML(str)
-        title = html.xpath('//title/text()')[0].replace('_哔哩哔哩_bilibili', '') + '.mp3'
+        title = html.xpath('//title/text()')[0]. \
+            replace('_哔哩哔哩_bilibili', ''). \
+            replace('/', '_'). \
+            replace('\\', '_') + '.mp3'
         print(title)
         # 2.提取音频
         result = re.findall(r'<script>window.__playinfo__=(.*?)</script>', str)[0]
@@ -141,5 +144,5 @@ if __name__ == '__main__':
     # 收藏夹列表索引
     fav_index = 0
     # 收藏夹列表内容索引
-    songs_index = [0, 3]
+    songs_index = [0, 1, 3]
     t.start(fav_index, songs_index)
