@@ -1,0 +1,49 @@
+项目名：Bilibili_Project
+
+获取收藏夹里的视频信息
+
+https://api.bilibili.com/x/v3/fav/resource/list?media_id=1149786820&pn=1&ps=20
+
+参数解释：
+    media_id: 收藏夹的id号
+    pn: 第xxx页
+    ps: 每一页的多少条数据
+
+请求： get
+数据格式: json
+
+视频链接
+    av号：https://www.bilibili.com/video/av
+    bv号：https://www.bilibili.com/video/bv
+
+
+提取音视频链接：
+    从网页中提取json数据：<script>window.__playinfo__=(.*)</script>
+
+数据格式：json
+
+提取标题：
+    从html的title标签直接提取。
+        <title.*>(.*)_哔哩哔哩_bilibili</title>
+
+获取用户的收藏夹：
+    https://api.bilibili.com/x/v3/fav/folder/created/list-all?up_mid=351880220
+    
+参数解释：
+    up_mid： 用户的UID
+
+数据格式: json
+
+备注：需要cookie
+
+获取视频选集
+    地址：https://www.bilibili.com/video/BV号?p=某一个数
+    
+    通过正则表达式提取json数据：
+        result = re.findall(r'<script>window.__INITIAL_STATE__=(.*?);\(function\(\).*?</script>', str)[0]
+
+    获取标题：
+        title = jsonpath.jsonpath(json_data, '$..pages..part')
+
+    获取视频数目：
+        length = jsonpath.jsonpath(json_data, '$.videoData.videos')
